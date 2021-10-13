@@ -1,0 +1,30 @@
+{%extends 'openpage.html'%} {%load static%} {%block content%} {%if update%}
+<h1>Update the room {{pk}}</h1>
+{%else%}
+<h1>Create A new Room</h1>
+{%endif%}
+<a href="{%url 'homepage'%}">Home</a>
+<form method="POST" action="">
+  {%csrf_token%}
+  <p>
+    Topic :
+    <input
+      type="text"
+      name="room_name"
+      value="{%if update%} {{form.room_name.value}} {%endif%}"
+    />
+  </p>
+  <p>
+    Topic Desc :
+    <textarea name="room_description" rows="6" cols="40">
+        {%if update%} {{form.room_description.value}} {%endif%}
+
+</textarea
+    >
+  </p>
+
+  <input type="submit" value="create Room" />
+</form>
+<hr />
+<hr />
+{%endblock%}

@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  height: 10vh;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(168, 151, 211);
+  justify-content: space-evenly;
+}
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.authcontrol {
+  border: 1px solid #f50057;
+  background-color: transparent;
+  padding: 10px 16px;
+}
+.authcontrol > a {
+  text-decoration: none;
+  color: #f50057;
+}

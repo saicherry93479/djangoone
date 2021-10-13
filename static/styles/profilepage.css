@@ -1,0 +1,12 @@
+.profileimg {
+  margin-left: 100px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.classone {
+  height: 300px;
+  width: 300px;
+  background-color: brown;
+}

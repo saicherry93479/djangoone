@@ -1,0 +1,36 @@
+{%extends 'openpage.html'%} {%load static%} {%block styles%}
+<link rel="stylesheet" href="{%static 'styles/profilepage.css'%}" />{%endblock%}
+{%block content%}
+<p><a href="{%url 'homepage'%}">Home</a></p>
+<span><a href="{%url 'updateprofile'%}">Upadate Profile</a></span>
+<hr />
+<hr />
+{%if not userDetails.profilepic %}
+<img
+  class="profileimg"
+  src="{%static 'images/userimage.png'%}"
+  alt="no profile"
+/>
+{%else%}
+<img class="profileimg" src="{{userDetails.profilepic.url}}" alt="no profile" />
+
+{%endif%}
+<p>-------->>{{request.user.username}}</p>
+<hr />
+<hr />
+<div>
+  {%for room in rooms%}
+  <div>
+    <div>
+      <span>Room name : <b>{{room.room_name}}</b></span>
+      <span>Room desc : <strong>{{room.room_description}}</strong></span>
+    </div>
+    <a href="{%url 'updateroomformpage' room.room_name %}">update Room</a>
+    <a href="{%url 'deleteroompage' room.room_name%}">Delete Room</a>
+  </div>
+  <hr />
+
+  {%endfor%}
+</div>
+
+{%endblock%}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="POST" action="" enctype="multipart/form-data">
+      {%csrf_token%}
+      <p><input type="text" name="title" /></p>
+      <p><input type="file" name="image" id="imageFile" accept="image/*" /></p>
+      <input type="submit" />
+    </form>
+    <div>
+      {%for image in images%}
+      <div>
+        <p>Title is : {{image.title}}</p>
+        <img src="{{image.image.url}}" alt="unable to load" />
+      </div>
+      {%endfor%}
+    </div>
+  </body>
+</html>

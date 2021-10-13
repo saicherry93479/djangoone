@@ -1,0 +1,56 @@
+{%extends 'openpage.html'%} {%load static%} {%block styles%}
+<link rel="stylesheet" href="{%static 'styles/signuppage.css' %}" />
+{%endblock%} {%block content%}
+
+{%if redirected%}
+<p><a href="/">Openpage</a></p>
+<form method="POST" action="">
+  {%csrf_token%}
+
+  <p>
+    UserName :
+    <input type="text" name="username" value="{{redirect.username}}" />
+    {%ifequal error "usernameerror"%}
+    <p class="error">there is anotheruser with same name</p>
+
+    {%endifequal%}
+  </p>
+
+  <p>
+    password :
+    <input type="password" name="password1" value="{{redirect.password1}}" />
+    
+  </p>
+  <p>
+    Re-enter Password :
+    <input type="password" name="password2" value="{{redirect.password2}}" />
+     {%ifequal error "passworderror"%}
+    <p class="error">please enter password correctly</p>
+
+    {%endifequal%}
+  </p>
+  <p>Email : <input type="email" name="email" value="{{redirect.email}}" />
+ {%ifequal error "emailerror"%}
+    <p class="error">There is another user with same email</p>
+
+    {%endifequal%}</p>
+  <input type="submit" value="signup" />
+   <p><a href="{%url 'loginpage'%}">Login</a></p>
+</form>
+
+{%else%}
+<p><a href="/">Openpage</a></p>
+<form action="" method="POST">
+  {%csrf_token%}
+  <p>UserName : {{form.username}}</p>
+  <p>password : {{form.password1}}</p>
+  <p>Re-enter Password : {{form.password2}}</p>
+  <p>Email : <input type="email" name="email" /></p>
+ 
+
+  <input type="submit" value="signup" />
+  <p><a href="{%url 'loginpage'%}">Login</a></p>
+</form>
+<hr />
+<hr />
+{%endif%} {%endblock%}

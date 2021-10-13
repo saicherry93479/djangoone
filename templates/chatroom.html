@@ -1,0 +1,42 @@
+{%extends 'openpage.html'%} {%load static%} {%block scripts%}
+<script>
+  var messages = "{{host_room_f}}";
+  // console.log("messagesa are ", messages);
+</script>
+<script src="{% static 'scripts/chatroom.js'%}"></script>
+{%endblock%} {%block content%}
+<a href="{%url 'homepage'%}">Home</a>
+<a href="{%url 'profile'%}">Profile</a>
+<h2>ChatRoom Name : {{host_room.room_name}}</h2>
+<p>@{{host_room.user_created.username}}</p>
+<div
+  style="
+    width: 700px;
+    height: 400px;
+    background-color: azure;
+
+    margin-left: 50px;
+    overflow-y: auto;
+  "
+>
+  <form
+    method="POST"
+    action="{%url 'messagehandler' host_room.user_created.username host_room.room_name%}"
+  >
+    {%csrf_token%} <input type="text" name="message" />
+    <input type="submit" value="sent" />
+  </form>
+  {%for message in messages%} {%ifequal request.user message.message_sent%}
+  <div>
+    <p>{{message.message_sent.username}} : {{message.message}}</p>
+  </div>
+
+  {%else%}
+  <div>
+    <p>{{message.message}} : {{message.message_sent.username}}</p>
+  </div>
+
+  {%endifequal%} {%endfor%}
+</div>
+
+{%endblock%}

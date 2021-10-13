@@ -1,0 +1,29 @@
+{%extends 'openpage.html'%} {%block content%}
+<hr />
+<hr />
+<a href="{%url 'homepage'%}">Home</a>
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {%csrf_token%}
+  <p>
+    username :
+    <input name="username" type="text" value="{{request.user.username}}" />
+  </p>
+  <p>
+    email : <input name="email" type="email" value="{{request.user.email}}" />
+  </p>
+  <p>{{form.profilepic}}</p>
+  <p>
+    firstName :
+    <input name="first_name" type="text" value="{{appuser.first_name}}" />
+  </p>
+  <p>
+    lastName:
+    <input name="last_name" type="text" value="{{appuser.last_name}}" />
+  </p>
+  <p><input type="submit" value="Update" /></p>
+</form>
+
+
+
+{%endblock%}

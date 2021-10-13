@@ -1,0 +1,89 @@
+{%extends 'openpage.html'%} {%load custom_tags%} {%load static%} 
+{%block navoptions%}
+<input type="text" placeholder="search" />
+
+<a href="{%url 'roomformpage'%}"><button>Create Room +</button></a>
+<span><a href="{%url 'profile'%}">{{request.user}}</a> </span>
+<button><a href="{%url 'logoutpage'%}">Logout</a></button>
+{%endblock%} {%block content%}
+<div style="display: flex">
+  <div class="allRoomNames">
+    {%for room in rooms_left%}
+    <p>{{room.room_name}} ({{room.dcount}})</p>
+
+    {%endfor%}
+  </div>
+  <div class="allRoomDetails">
+    {%for room in rooms%} {%ifnotequal request.user room.user_created %}
+    <div>
+      <p>Host : {{room.user_created.username}} Room : {{room.room_name}}</p>
+      <p>desc : {{room.room_description}}</p>
+      {%if room|following:request.user%}
+      <a href="{%url 'roomchatpage' room.user_created.username room.room_name%}"
+        ><button>Open Room</button></a
+      >
+      <a
+        href="{%url 'unfollowhandler' room.user_created.username room.room_name %}"
+        ><button>UnFollow</button></a
+      >
+
+      {%else%}
+      <a
+        href="{%url 'followhandler' room.user_created.username room.room_name %}"
+        ><button>Follow</button></a
+      >
+      {%endif%}
+    </div>
+
+    <hr />
+    <hr />
+
+    {%endifnotequal%} {%endfor%}
+  </div>
+  <div class="recentRoomCreations">
+    <div>
+      {%for room in rooms%} {%ifequal request.user room.user_created %}
+      <div>
+        <p>Host : {{room.user_created.username}} Room : {{room.room_name}}</p>
+        <p>desc : {{room.room_description}}</p>
+        <a
+          href="{%url 'roomchatpage' room.user_created.username room.room_name%}"
+          ><button>Open Room</button></a
+        >
+      </div>
+
+      <hr />
+      <hr />
+
+      {%endifequal%} {%endfor%}
+    </div>
+    <div>
+      {%for room in recentrooms%} {%ifnotequal request.user room.user_created %}
+      <div>
+        <p>Host : {{room.user_created.username}} Room : {{room.room_name}}</p>
+        <p>desc : {{room.room_description}}</p>
+        {%if room|following:request.user%}
+        <a><button>Open Room</button></a>
+        <a
+          href="{%url 'unfollowhandler' room.user_created.username room.room_name %}"
+          ><button>UnFollow</button></a
+        >
+
+        {%else%}
+        <a
+          href="{%url 'followhandler' room.user_created.username room.room_name %}"
+          ><button>Follow</button></a
+        >
+        {%endif%}
+      </div>
+
+      <hr />
+      <hr />
+
+      {%endifnotequal%} {%endfor%}
+    </div>
+  </div>
+</div>
+<h1>{{"sai"|add}}</h1>
+
+{%endblock%}
