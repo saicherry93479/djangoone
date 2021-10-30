@@ -158,3 +158,22 @@ def imageprob(request):
         imagemodel.save()
         return redirect("imageproblem")
     return render(request,'iamgeproblem.html',context)
+
+def custom_page_not_found_view(request, exception):
+    return render(request, "404.html", {})
+
+def custom_error_view(request, exception=None):
+     response = render_to_response(
+     '500.html',
+     context_instance=RequestContext(request)
+        )
+
+     response.status_code = 500
+
+     return response
+
+def custom_permission_denied_view(request, exception=None):
+    return render(request, "403.html", {})
+
+def custom_bad_request_view(request, exception=None):
+    return render(request, "400.html", {})

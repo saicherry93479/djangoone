@@ -13,7 +13,7 @@
     {%endblock%}
   </head>
   <body>
-    {%if Dshow%} {%else%}
+     {%if Dshow%} {%else%}
     <div class="navbar">
       <h1>Logo</h1>
       {%block navoptions%}
@@ -23,6 +23,7 @@
 
       {%endblock%}
     </div>
+
     {%endif%} {%block content%} {%endblock%}
   </body>
 </html>

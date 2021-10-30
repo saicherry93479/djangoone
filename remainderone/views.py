@@ -128,7 +128,9 @@ def logoutpage(request):
     logout(request)
     return redirect("openpage")
 def openpage(request):
-    context={}
+    context={
+        "name":"charan"
+    }
     if request.user.is_anonymous:
          return render(request,'openpage.html',context)
     else :
