@@ -8,7 +8,7 @@ from threading import Timer
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core import serializers
-
+import json
 @receiver(post_save,sender=message)
 def message_loop(sender,instance,created,**kwargs):
     if created :
@@ -45,6 +45,11 @@ def roomchatpage(request,username,roomname):
     messages=message.objects.filter(room_name=host_room)[::-1]
     host_room_f=serializers.serialize("json",messages)
     print("start messages length is ",len(messages))
+    room_name={
+        "user_created":host_room.user_created.username,
+        "room_name":host_room.room_name
+    }
+    
 
    
 
@@ -55,7 +60,8 @@ def roomchatpage(request,username,roomname):
         'host_room':host_room,
         'Dshow':True,
         'messages':messages,
-        'host_room_f':host_room_f
+        'host_room_f':host_room_f,
+        'roomname':room_name
         
     }
 

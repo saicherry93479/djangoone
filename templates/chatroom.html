@@ -1,7 +1,11 @@
 {%extends 'openpage.html'%} {%load static%} {%block scripts%}
 <script>
-  var messages = "{{host_room_f}}";
+  // console.log("room name is ", room_name);
+  const b = "{{ roomname|safe }}";
+  console.log("in in ", b);
   // console.log("messagesa are ", messages);
+  const a = JSON.parse(document.getElementById("room-name").textContent);
+  console.log("a is ", a);
 </script>
 <script src="{% static 'scripts/chatroom.js'%}"></script>
 {%endblock%} {%block content%}
@@ -38,5 +42,8 @@
 
   {%endifequal%} {%endfor%}
 </div>
-
-{%endblock%}
+<div>
+  room name :{{room_name.room_name}}
+  <h2>{{roomname}}</h2>
+</div>
+{{ roomname|json_script:"room-name" }} {%endblock%}
