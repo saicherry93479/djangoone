@@ -2,7 +2,14 @@ from django.urls import path
 from remainderone.views import openpage,loginpage,signuppage,homepage,logoutpage,profilepage,updateprofilepage,roomformpage
 
 from remainderone.viewsone import imageprob,updateroomformpage,deleteroompage,followhandler,unfollowhandler,roomchatpage,messagehandler
+from django.conf.urls import (
+handler400, handler403, handler404, handler500
+)
 
+handler404 = 'remainderone.viewsone.custom_page_not_found_view'
+handler500 = 'remainderone.viewsone.custom_error_view'
+handler403 = 'remainderone.viewsone.custom_permission_denied_view'
+handler400 = 'remainderone.viewsone.custom_bad_request_view'
 urlpatterns=[
     path("",openpage,name="openpage"),
     path("loginpage/",loginpage,name="loginpage"),
